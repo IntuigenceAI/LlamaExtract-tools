@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 from dotenv import load_dotenv
 
-load_dotenv("general.env")
+load_dotenv("/Users/dijanajanjetovic/IntuigenceAI/Dijana_work/general.env") #add your own .env with API key
 api_key = os.getenv("LLAMA_CLOUD_API_KEY")
 os.environ["LLAMA_CLOUD_API_KEY"] = api_key
 
@@ -35,8 +35,7 @@ class QuestionAnswer(BaseModel):
     question_images: List[SolutionImage] = Field(description="Any diagrams or figures shown with the question", default=[])
     multiple_choice_options: MultipleChoiceOptions
     correct_answer: str = Field(description="Correct answer: A, B, C, or D")
-    customary_us_solution: Solution = Field(description="US imperial units solution with any relevant images")
-    si_solution: Solution = Field(description="SI metric units solution with any relevant images")
+    solution: Solution = Field(description="Solution with step-by-step method, calculations, and any relevant images")
 
 class ChapterQA(BaseModel):
     questions: List[QuestionAnswer] = Field(description="All questions and answers in chapter with images")
@@ -52,8 +51,8 @@ def main():
     print("Agent created!")
 
     # Directory paths
-    chapter_pdfs_dir = "/Users/dijanajanjetovic/IntuigenceAI/Dijana_work/chapter_pdfs"
-    output_dir = "/Users/dijanajanjetovic/IntuigenceAI/Dijana_work/extracted_qa_with_images"
+    chapter_pdfs_dir = "/Users/dijanajanjetovic/IntuigenceAI/Dijana_work/topic_pdfs"
+    output_dir = "/Users/dijanajanjetovic/IntuigenceAI/Dijana_work/extracted_qa_with_images2"
 
     # Create output directory
     os.makedirs(output_dir, exist_ok=True)
